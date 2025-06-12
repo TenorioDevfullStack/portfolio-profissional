@@ -1,115 +1,86 @@
+"use client";
+
+import { useState, useRef } from "react";
+import { sendEmail } from "@/actions/sendEmail";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Loader2 } from "lucide-react";
 
 export function ContactSection() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (formData: FormData) => {
+    setIsSubmitting(true);
+
+    const result = await sendEmail(formData);
+
+    if (result.success) {
+      toast.success("Mensagem enviada com sucesso!");
+      formRef.current?.reset(); // Limpa o formulário
+    } else {
+      // Trata erros de validação ou de envio
+      if (result.errors) {
+        const errors = result.errors;
+        if (errors.name) toast.error(errors.name[0]);
+        if (errors.email) toast.error(errors.email[0]);
+        if (errors.message) toast.error(errors.message[0]);
+      } else {
+        toast.error(result.message || "Ocorreu um erro. Tente novamente.");
+      }
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
-    <section
-      id="contato"
-      className="py-20 bg-gradient-to-br from-background via-purple-50 to-blue-50 dark:from-background dark:via-purple-950 dark:to-blue-950"
-    >
+    <section id="contato" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-            Entre em Contato
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Vamos transformar suas ideias em realidade. Entre em contato para
-            discutirmos seu projeto.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="bg-card hover:shadow-xl transition-all duration-300">
-            <CardHeader>
-              <div className="w-12 h-12 flex items-center justify-center mb-4">
-                <FaTelegramPlane size={24} color="#229ED9" />
-              </div>
-              <CardTitle className="text-xl font-bold text-foreground">
-                Telegram
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Para uma comunicação rápida e direta
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                asChild
-              >
-                <a
-                  href="https://t.me/leandrosilva_dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaTelegramPlane className="w-4 h-4 mr-2" />
-                  Enviar Mensagem
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card hover:shadow-xl transition-all duration-300">
-            <CardHeader>
-              <div className="w-12 h-12 flex items-center justify-center mb-4">
-                <SiGmail size={24} color="#EA4335" />
-              </div>
-              <CardTitle className="text-xl font-bold text-foreground">
-                Email
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Para propostas formais e documentação
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                asChild
-              >
-                <a href="mailto:leandrosilva.dev@gmail.com">
-                  <SiGmail className="w-4 h-4 mr-2" />
-                  Enviar Email
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card hover:shadow-xl transition-all duration-300">
-            <CardHeader>
-              <div className="w-12 h-12 flex items-center justify-center mb-4">
-                <FaWhatsapp size={24} color="#25D366" />
-              </div>
-              <CardTitle className="text-xl font-bold text-foreground">
-                Agendamento
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Para uma reunião detalhada sobre seu projeto
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                asChild
-              >
-                <a
-                  href="https://calendly.com/leandrosilva-dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaWhatsapp className="w-4 h-4 mr-2" />
-                  Agendar Reunião
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+        <h2 className="text-3xl font-bold text-center mb-10">
+          Entre em Contato
+        </h2>
+        {/* Usamos a action diretamente no formulário */}
+        <form
+          ref={formRef}
+          action={handleSubmit}
+          className="max-w-xl mx-auto space-y-4"
+        >
+          <Input
+            name="name"
+            type="text"
+            placeholder="Seu nome"
+            required
+            disabled={isSubmitting}
+            minLength={3}
+          />
+          <Input
+            name="email"
+            type="email"
+            placeholder="Seu e-mail"
+            required
+            disabled={isSubmitting}
+          />
+          <Textarea
+            name="message"
+            placeholder="Sua mensagem"
+            required
+            rows={5}
+            disabled={isSubmitting}
+            minLength={10}
+          />
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Enviando...
+              </>
+            ) : (
+              "Enviar Mensagem"
+            )}
+          </Button>
+        </form>
       </div>
     </section>
   );

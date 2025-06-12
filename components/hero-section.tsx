@@ -21,13 +21,13 @@ export function HeroSection() {
           {/* Desfoque sutil e amplo atrás do texto, sem formato visível */}
           <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[28rem] rounded-3xl backdrop-blur-2xl bg-black/5 dark:bg-black/10 -z-10 pointer-events-none"></div>
           <div className="text-center w-full">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white !text-white drop-shadow-md">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 !text-white drop-shadow-md">
               Olá, eu sou Leandro Tenório
             </h1>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-white !text-white drop-shadow-md">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 !text-white drop-shadow-md">
               Desenvolvedor
             </h2>
-            <p className="relative text-lg sm:text-xl md:text-2xl leading-relaxed px-6 py-4 mb-6 text-white !text-white drop-shadow-md">
+            <p className="relative text-lg sm:text-xl md:text-2xl leading-relaxed px-6 py-4 mb-6  !text-white drop-shadow-md">
               Desenvolvedor especializado em soluções web e integração com IA.
               Crio aplicações personalizadas que automatizam processos e
               otimizam resultados para negócios.
