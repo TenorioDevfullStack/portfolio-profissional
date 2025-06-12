@@ -1,12 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-// Inicializa o Resend com a chave da API que está no arquivo .env.local
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Define o formato e as regras de validação para os dados do formulário
+// A validação com Zod não muda, ela é independente do provedor de e-mail
 const contactFormSchema = z.object({
   name: z
     .string()
@@ -17,18 +14,26 @@ const contactFormSchema = z.object({
     .min(10, { message: "A mensagem precisa ter no mínimo 10 caracteres." }),
 });
 
+// Configuração do "transportador" do Nodemailer com as variáveis de ambiente do Gmail
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_SERVER_HOST,
+  port: Number(process.env.EMAIL_SERVER_PORT),
+  secure: true, // true para a porta 465 (padrão do Gmail com SSL)
+  auth: {
+    user: process.env.EMAIL_SERVER_USER,
+    pass: process.env.EMAIL_SERVER_PASSWORD, // Aqui entra a sua Senha de App de 16 dígitos
+  },
+});
+
 export async function sendEmail(formData: FormData) {
-  // Converte os dados do formulário para um objeto simples
   const rawFormData = {
     name: formData.get("name"),
     email: formData.get("email"),
     message: formData.get("message"),
   };
 
-  // Valida os dados usando as regras que definimos com o Zod
   const validationResult = contactFormSchema.safeParse(rawFormData);
 
-  // Se a validação falhar, retorna um erro com as mensagens
   if (!validationResult.success) {
     return {
       success: false,
@@ -38,13 +43,13 @@ export async function sendEmail(formData: FormData) {
 
   const { name, email, message } = validationResult.data;
 
-  // Se a validação passar, tenta enviar o e-mail
+  // Tenta enviar o e-mail usando o transportador do Nodemailer
   try {
-    const data = await resend.emails.send({
-      from: "Contato Portfólio <onboarding@resend.dev>", // Endereço de envio padrão do Resend
-      to: ["seu-email-pessoal@gmail.com"], // <-- IMPORTANTE: SUBSTITUA PELO SEU E-MAIL!
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM, // Ex: "Seu Nome <seu-email@gmail.com>"
+      to: process.env.EMAIL_TO, // O e-mail onde você quer receber as mensagens
+      replyTo: email, // Para poder responder diretamente ao visitante
       subject: `Nova mensagem de ${name} do seu Portfólio`,
-      replyTo: email, // Permite que você responda diretamente para o e-mail do visitante
       html: `<p>Você recebeu uma nova mensagem através do seu portfólio:</p>
              <p><strong>Nome:</strong> ${name}</p>
              <p><strong>Email:</strong> ${email}</p>
@@ -52,12 +57,12 @@ export async function sendEmail(formData: FormData) {
              <p>${message}</p>`,
     });
 
-    return { success: true, data };
+    return { success: true };
   } catch (error) {
-    console.error("Erro ao enviar e-mail:", error);
+    console.error("Erro ao enviar e-mail com Nodemailer:", error);
     return {
       success: false,
-      message: "Ocorreu um erro no servidor. Tente novamente.",
+      message: "Ocorreu um erro no servidor ao enviar a mensagem.",
     };
   }
 }
