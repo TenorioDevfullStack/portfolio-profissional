@@ -7,6 +7,7 @@ import { ProcessSection } from "@/components/process-section";
 import { CTASection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
 import { MobileOptimizations } from "@/components/mobile-optimizations";
+import { ContactSection } from "@/components/contact-section";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <ProjectsSection />
       <ProcessSection />
       <CTASection />
+      <ContactSection />
       <Footer />
     </main>
   );
