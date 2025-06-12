@@ -1,101 +1,54 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Bot, Github, BarChart3 } from "lucide-react";
 import { ProjectCard } from "./project-card";
 
-export const projects = [
+// Mantendo os imports das imagens que já estão a funcionar
+import projectImage1 from "@/assets/imagens/dashboard1.jpg";
+import projectImage2 from "@/assets/imagens/dashboard2.jpg";
+
+// Agora temos uma lista com dois projetos distintos, mas relacionados
+const projects = [
   {
-    title: "Chatbot com IA",
+    title: "Bot de Captação de Leads com IA (Telegram)",
     description:
-      "Um chatbot inteligente desenvolvido com Next.js 13, TypeScript e integração com a API da OpenAI. Oferece respostas contextuais e precisas para perguntas dos usuários.",
-    image: null,
-    video: "/demo-bot.mp4",
-    status: "Em Produção",
-    icon: Bot,
-    features: [
-      "Integração com OpenAI GPT-4",
-      "Interface responsiva e moderna",
-      "Respostas em tempo real",
-      "Histórico de conversas",
+      "Desenvolvimento de um bot para Telegram que interage com usuários, captura informações essenciais e utiliza a API do Gemini para qualificar leads em quente, morno ou frio com base no interesse demonstrado.",
+    technologies: ["Telegram API", "Gemini API", "Node.js", "TypeScript"],
+    media: [
+      { type: "video", src: "/demo-bot.mp4" }, // Mídia principal é o vídeo demo
     ],
-    technologies: [
-      "Next.js 13",
-      "TypeScript",
-      "OpenAI API",
-      "TailwindCSS",
-      "Shadcn UI",
-    ],
-    liveUrl: "https://t.me/CaptaLead_bot",
-    githubUrl: "https://github.com/TenorioDevfullStack/chatbot",
+    livePreviewUrl: "https://t.me/CaptaLead_bot", // Pode ser um link para o bot no Telegram
   },
   {
-    title: "Dashboard de Leads",
+    title: "Dashboard de Análise e Gestão de Leads",
     description:
-      "Dashboard interativo para análise de leads em tempo real. Desenvolvido com Next.js, TypeScript e Shadcn UI. Oferece visualizações dinâmicas e filtros interativos.",
-    image: "/images/dashboard1.jpg",
-    video: "",
-    status: "Em Produção",
-    icon: BarChart3,
-    features: [
-      "Análise em tempo real",
-      "Filtros interativos",
-      "Gráficos dinâmicos",
-      "Exportação de dados",
-    ],
+      "Plataforma analítica que recebe os dados do Bot do Telegram em tempo real. Permite a visualização, filtragem e gestão dos leads capturados, fornecendo insights para otimizar o processo de vendas.",
     technologies: [
-      "Next.js 13",
+      "Next.js",
       "TypeScript",
-      "MongoDB",
       "TailwindCSS",
-      "Shadcn UI",
+      "Recharts",
+      "Render",
     ],
-    liveUrl: "https://dashboard-leads-telegram.onrender.com",
-    githubUrl: "https://github.com/TenorioDevfullStack/dashboard",
+    media: [
+      { type: "image", src: projectImage1 }, // Mídia principal são as imagens
+      { type: "image", src: projectImage2 },
+    ],
+    livePreviewUrl: "https://dashboard-leads-telegram.onrender.com",
   },
-];
+] as const;
 
 export function ProjectsSection() {
   return (
-    <section
-      id="projetos"
-      className="py-20 bg-gradient-to-br from-background via-purple-50 to-blue-50 dark:from-background dark:via-purple-950 dark:to-blue-950"
-    >
+    <section id="projetos" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-            Projetos em Produção
-          </h2>
-          <p className="text-xl text-foreground max-w-3xl mx-auto">
-            Soluções reais desenvolvidas e implementadas, demonstrando expertise
-            em IA e desenvolvimento full-stack.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Projetos em Destaque
+        </h2>
+        {/* Restaurando o layout de grid para exibir os cards lado a lado */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-4">
-            Interessado em ver mais projetos?
-          </p>
-          <Button
-            variant="outline"
-            className="border-border text-foreground hover:bg-accent hover:text-accent-foreground"
-            asChild
-          >
-            <a
-              href="https://github.com/TenorioDevfullStack"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="w-4 h-4 mr-2" />
-              Ver GitHub Completo
-            </a>
-          </Button>
         </div>
       </div>
     </section>

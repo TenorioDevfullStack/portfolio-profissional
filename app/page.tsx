@@ -4,24 +4,24 @@ import { ServicesSection } from "@/components/services-section";
 import { ExpertiseSection } from "@/components/expertise-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { ProcessSection } from "@/components/process-section";
-import { CTASection } from "@/components/cta-section";
+import { CTASection } from "@/components/cta-section"; // <-- CORREÇÃO APLICADA AQUI
 import { Footer } from "@/components/footer";
-import { MobileOptimizations } from "@/components/mobile-optimizations";
 import { ContactSection } from "@/components/contact-section";
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="min-h-screen">
-      <MobileOptimizations />
+    <>
       <Header />
-      <HeroSection />
-      <ServicesSection />
-      <ExpertiseSection />
-      <ProjectsSection />
-      <ProcessSection />
-      <CTASection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <ServicesSection />
+        <ExpertiseSection />
+        <ProjectsSection />
+        <ProcessSection />
+        <CTASection /> {/* <-- CORREÇÃO APLICADA AQUI */}
+        <ContactSection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
