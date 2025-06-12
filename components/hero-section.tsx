@@ -1,30 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Bot,
-  Zap,
-  TrendingUp,
-  Code,
-  Server,
-  Workflow,
-  Cloud,
-  TerminalSquare,
-  Send,
-  Github,
-  Linkedin,
-  Mail,
-  Phone,
-} from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SimpleParticlesBackground from "./SimpleParticlesBackground";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaTelegramPlane,
-  FaWhatsapp,
-} from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import { SocialLinks } from "./social-links";
 
 export function HeroSection() {
   const [isClient, setIsClient] = useState(false);
@@ -55,50 +32,8 @@ export function HeroSection() {
               Crio aplicações personalizadas que automatizam processos e
               otimizam resultados para negócios.
             </p>
-            <div className="mt-8 flex justify-center gap-6">
-              <a
-                href="https://github.com/TenorioDevfullStack"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-                aria-label="GitHub"
-              >
-                <FaGithub size={32} color="#181717" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/leandro-ten%C3%B3rio-088378310/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin size={32} color="#0077B5" />
-              </a>
-              <a
-                href="https://t.me/CaptaLead_bot"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-                aria-label="Telegram"
-              >
-                <FaTelegramPlane size={32} color="#229ED9" />
-              </a>
-              <a
-                href="mailto:tenorioleandro22@gmail.com"
-                className="hover:scale-110 transition-transform"
-                aria-label="Gmail"
-              >
-                <SiGmail size={32} color="#EA4335" />
-              </a>
-              <a
-                href="https://wa.me/551196637319"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-                aria-label="WhatsApp"
-              >
-                <FaWhatsapp size={32} color="#25D366" />
-              </a>
+            <div className="mt-8 flex justify-center">
+              <SocialLinks iconSize={32} />
             </div>
           </div>
         </div>

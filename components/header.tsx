@@ -4,11 +4,35 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
+import { navLinks } from "@/lib/data";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    document
+      .getElementById(href.substring(1))
+      ?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false); // Fecha o menu ao clicar em um link no mobile
+  };
+
+  const renderNavLinks = () =>
+    navLinks.map((link) => (
+      <a
+        key={link.href}
+        href={link.href}
+        className="text-gray-300 hover:text-slate-400 transition-colors"
+        onClick={(e) => handleLinkClick(e, link.href)}
+      >
+        {link.label}
+      </a>
+    ));
 
   return (
     <header className="fixed top-0 w-full bg-gray-900/95 backdrop-blur-sm border-b border-gray-700 z-50">
@@ -20,78 +44,7 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a
-              href="#inicio"
-              className="text-gray-300 hover:text-slate-400 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("inicio")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Início
-            </a>
-            <a
-              href="#servicos"
-              className="text-gray-300 hover:text-slate-400 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("servicos")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Serviços
-            </a>
-            <a
-              href="#expertise"
-              className="text-gray-300 hover:text-slate-400 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("expertise")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Expertise
-            </a>
-            <a
-              href="#projetos"
-              className="text-gray-300 hover:text-slate-400 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("projetos")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Projetos
-            </a>
-            <a
-              href="#processo"
-              className="text-gray-300 hover:text-slate-400 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("processo")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Processo
-            </a>
-            <a
-              href="#contato"
-              className="text-gray-300 hover:text-slate-400 transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("contato")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Contato
-            </a>
+            {renderNavLinks()}
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -161,89 +114,18 @@ export function Header() {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 border-t border-gray-700">
             <div className="flex flex-col space-y-4 pt-4">
-              <a
-                href="#inicio"
-                className="text-gray-300 hover:text-slate-400 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("inicio")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Início
-              </a>
-              <a
-                href="#servicos"
-                className="text-gray-300 hover:text-slate-400 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("servicos")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Serviços
-              </a>
-              <a
-                href="#expertise"
-                className="text-gray-300 hover:text-slate-400 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("expertise")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Expertise
-              </a>
-              <a
-                href="#projetos"
-                className="text-gray-300 hover:text-slate-400 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("projetos")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Projetos
-              </a>
-              <a
-                href="#processo"
-                className="text-gray-300 hover:text-slate-400 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("processo")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Processo
-              </a>
-              <a
-                href="#contato"
-                className="text-gray-300 hover:text-slate-400 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("contato")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Contato
-              </a>
-              <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" size="sm" asChild>
-                  <a
-                    href="https://t.me/CaptaLead_bot"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Agendar Consulta
-                  </a>
-                </Button>
-              </div>
+              {renderNavLinks()}
+            </div>
+            <div className="flex flex-col space-y-2 pt-4">
+              <Button variant="outline" size="sm" asChild>
+                <a
+                  href="https://t.me/CaptaLead_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Agendar Consulta
+                </a>
+              </Button>
             </div>
           </nav>
         )}
