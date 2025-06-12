@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/carousel";
 import { Eye } from "lucide-react";
 
-// A interface agora espera que as propriedades do array sejam 'readonly'
 interface Project {
   title: string;
   description: string;
