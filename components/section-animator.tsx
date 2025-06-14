@@ -13,7 +13,7 @@ export function SectionAnimator({ children, delay = 0 }: Props) {
   const isInView = useInView(ref, { once: true });
 
   const variants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0 },
   };
 
@@ -23,7 +23,7 @@ export function SectionAnimator({ children, delay = 0 }: Props) {
       variants={variants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      transition={{ duration: 0.5, delay }}
+      transition={{ duration: 0.8, delay, ease: [0.4, 0, 0.2, 1] }}
     >
       {children}
     </motion.div>

@@ -46,8 +46,8 @@ export function CTASection() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
-            <Card className="group bg-card border-2 border-gray-700 hover:border-purple-200 transition-all duration-300 relative overflow-hidden hover:shadow-2xl transform hover:scale-105 cursor-pointer">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <Card className="group bg-white/60 dark:bg-slate-900/60 border border-white/20 dark:border-slate-700/40 backdrop-blur-lg shadow-xl transition-all duration-300 relative overflow-hidden hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-2 hover:ring-2 hover:ring-primary/20 focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-blue-100/10 dark:from-slate-800/30 dark:to-blue-900/10 opacity-60 pointer-events-none" />
               <CardContent className="p-6 text-center relative z-10">
                 <div className="flex items-center justify-center mb-4">
                   <span
@@ -65,7 +65,12 @@ export function CTASection() {
                   Inicie seu atendimento com nosso assistente inteligente e
                   descubra como podemos ajudar seu projeto.
                 </p>
-                <Button variant="secondary" className="w-full" asChild>
+                <Button
+                  variant="secondary"
+                  className="w-full"
+                  asChild
+                  aria-label="Agendar Consulta no Telegram"
+                >
                   <a
                     href="https://t.me/CaptaLead_bot"
                     target="_blank"
@@ -78,8 +83,8 @@ export function CTASection() {
               </CardContent>
             </Card>
 
-            <Card className="group bg-card border-2 border-gray-700 hover:border-blue-200 transition-all duration-300 relative overflow-hidden hover:shadow-2xl transform hover:scale-105 cursor-pointer">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <Card className="group bg-white/60 dark:bg-slate-900/60 border border-white/20 dark:border-slate-700/40 backdrop-blur-lg shadow-xl transition-all duration-300 relative overflow-hidden hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-2 hover:ring-2 hover:ring-primary/20 focus-within:ring-2 focus-within:ring-primary/40 cursor-pointer">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-100/10 to-indigo-100/10 dark:from-blue-900/10 dark:to-indigo-900/10 opacity-60 pointer-events-none" />
               <CardContent className="p-6 text-center relative z-10">
                 <div className="flex items-center justify-center mb-4">
                   <span
@@ -97,7 +102,12 @@ export function CTASection() {
                   Fale comigo diretamente via WhatsApp para tirar dúvidas e
                   iniciar seu projeto.
                 </p>
-                <Button variant="secondary" className="w-full" asChild>
+                <Button
+                  variant="secondary"
+                  className="w-full"
+                  asChild
+                  aria-label="Chamar no WhatsApp"
+                >
                   <a
                     href="https://wa.me/5511966373319"
                     target="_blank"
@@ -118,7 +128,8 @@ export function CTASection() {
             <div className="flex justify-center space-x-8">
               <a
                 href="mailto:tenorioleandro22@gmail.com"
-                className="flex flex-col items-center group transition-transform duration-300 hover:scale-110"
+                className="flex flex-col items-center group transition-transform duration-300 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Enviar email para Leandro Tenório"
               >
                 <span
                   className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-2 group-hover:scale-110 transition-transform duration-300 ${
@@ -133,7 +144,8 @@ export function CTASection() {
                 href="https://wa.me/5511966373319"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center group transition-transform duration-300 hover:scale-110"
+                className="flex flex-col items-center group transition-transform duration-300 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Conversar no WhatsApp com Leandro Tenório"
               >
                 <span
                   className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-2 group-hover:scale-110 transition-transform duration-300 ${
@@ -148,7 +160,8 @@ export function CTASection() {
                 href="https://www.linkedin.com/in/leandro-ten%C3%B3rio-088378310/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center group transition-transform duration-300 hover:scale-110"
+                className="flex flex-col items-center group transition-transform duration-300 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Perfil LinkedIn de Leandro Tenório"
               >
                 <span
                   className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-2 group-hover:scale-110 transition-transform duration-300 ${

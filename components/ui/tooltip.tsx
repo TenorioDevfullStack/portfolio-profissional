@@ -1,30 +1,64 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+interface TooltipProps {
+  children: React.ReactNode;
+  content: React.ReactNode;
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+  className?: string;
+}
 
-const TooltipProvider = TooltipPrimitive.Provider
+export function Tooltip({
+  children,
+  content,
+  side = "top",
+  align = "center",
+  className,
+}: TooltipProps) {
+  const [isOpen, setIsOpen] = React.useState(false);
 
-const Tooltip = TooltipPrimitive.Root
+  const sideStyles = {
+    top: "bottom-full mb-2",
+    right: "left-full ml-2",
+    bottom: "top-full mt-2",
+    left: "right-full mr-2",
+  };
 
-const TooltipTrigger = TooltipPrimitive.Trigger
+  const alignStyles = {
+    start: "left-0",
+    center: "left-1/2 -translate-x-1/2",
+    end: "right-0",
+  };
 
-const TooltipContent = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
-  <TooltipPrimitive.Content
-    ref={ref}
-    sideOffset={sideOffset}
-    className={cn(
-      "z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-      className
-    )}
-    {...props}
-  />
-))
-TooltipContent.displayName = TooltipPrimitive.Content.displayName
-
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+  return (
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      {children}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className={cn(
+              "absolute z-50 px-3 py-2 text-sm rounded-lg bg-background/90 backdrop-blur-sm shadow-lg border border-border/40 dark:border-border/20",
+              sideStyles[side],
+              alignStyles[align],
+              className
+            )}
+          >
+            {content}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

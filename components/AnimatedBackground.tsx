@@ -64,25 +64,15 @@ export default function AnimatedBackground({
       ref={containerRef}
       className={`absolute inset-0 -z-10 pointer-events-none ${className}`}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-slate-900 animate-gradient-move" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-slate-900/20 animate-gradient-move" />
       <div className="absolute inset-0">
         {particles.map((p, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-float"
+            className="absolute w-1 h-1 bg-white/20 rounded-full animate-float"
             style={p}
           />
         ))}
-        {mouse && (
-          <div
-            className="absolute w-24 h-24 bg-red-500 border-4 border-black rounded-full opacity-95 pointer-events-none transition-transform duration-100 animate-pulse"
-            style={{
-              left: mouse.x - 48,
-              top: mouse.y - 48,
-              boxShadow: "0 0 32px 8px #a5b4fc, 0 0 64px 16px #818cf8",
-            }}
-          />
-        )}
       </div>
     </div>
   );
