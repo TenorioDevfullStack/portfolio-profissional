@@ -186,21 +186,31 @@
   bottom: 0;
   background-image: radial-gradient(
       circle at 20% 80%,
-      rgba(59, 130, 246, 0.2) 2px,
-      transparent 2px
+      rgba(30, 64, 175, 0.7) 3px,
+      transparent 3px
     ),
     radial-gradient(
       circle at 80% 20%,
-      rgba(245, 158, 11, 0.2) 2px,
+      rgba(154, 52, 18, 0.6) 2px,
       transparent 2px
     ),
     radial-gradient(
       circle at 40% 40%,
-      rgba(16, 185, 129, 0.2) 1px,
+      rgba(6, 95, 70, 0.5) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 65% 15%,
+      rgba(91, 33, 182, 0.4) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 15% 65%,
+      rgba(12, 74, 110, 0.5) 1px,
       transparent 1px
     );
-  background-size: 100px 100px, 150px 150px, 80px 80px;
-  animation: float 20s ease-in-out infinite;
+  background-size: 120px 120px, 180px 180px, 90px 90px, 150px 150px, 200px 200px;
+  animation: float 25s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -221,6 +231,16 @@
 }
 
 /* Animações personalizadas */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
 @keyframes electric-pulse {
   0%,
   100% {

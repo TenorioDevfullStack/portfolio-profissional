@@ -100,7 +100,7 @@ export default function HomePage() {
           : "rgba(240, 240, 240, 0.04)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = isDarkMode ? "#00FFFF" : "#008080";
+        ctx.fillStyle = isDarkMode ? "#00FFFF" : "#1e40af";
         ctx.font = fontSize + "px monospace";
 
         for (let i = 0; i < drops.length; i++) {
@@ -133,7 +133,9 @@ export default function HomePage() {
     return (
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-20"
+        className={`absolute inset-0 w-full h-full ${
+          isDarkMode ? "opacity-20" : "opacity-35"
+        }`}
         style={{ pointerEvents: "none" }}
       />
     );
