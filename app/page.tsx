@@ -297,7 +297,7 @@ export default function HomePage() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className={`w-44 h-44 mx-auto mb-8 rounded-full ${
+            className={`w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 mx-auto mb-8 rounded-full ${
               isDarkMode ? "electric-glow" : "light-glow"
             }`}
             style={{
@@ -497,8 +497,7 @@ export default function HomePage() {
                 }`}
               >
                 Minha missão é transformar ideias em realidade digital,
-                otimizando processos para empresas e clínicas através de
-                tecnologias de ponta.
+                otimizando processos através de tecnologias de ponta.
               </p>
             </motion.div>
 
@@ -747,7 +746,7 @@ export default function HomePage() {
       period: "2025 - Presente",
       location: "São Paulo, SP",
       description:
-        "Fundei a empresa especializada em soluções de IA e automação, desenvolvendo chatbots inteligentes e sistemas de automação para empresas e clínicas.",
+        "Fundei a empresa especializada em soluções de IA e automação, desenvolvendo chatbots inteligentes e sistemas de automação.",
       technologies: ["Python", "IA", "Automação", "NoCode", "Chatbots"],
     },
     {
@@ -1128,7 +1127,7 @@ export default function HomePage() {
                   {/* Primeira imagem */}
                   <div className="relative group">
                     {project.media?.image1 ? (
-                      <div className="relative overflow-hidden rounded-xl h-40 shadow-lg">
+                      <div className="relative overflow-hidden rounded-xl h-32 sm:h-36 md:h-40 shadow-lg">
                         <img
                           src={project.media.image1}
                           alt={`${project.title} - Screenshot 1`}
@@ -1185,7 +1184,7 @@ export default function HomePage() {
                       </div>
                     ) : (
                       <div
-                        className={`h-40 rounded-xl ${
+                        className={`h-32 sm:h-36 md:h-40 rounded-xl ${
                           isDarkMode ? "bg-deep-teal/20" : "bg-ocean-blue/20"
                         } flex items-center justify-center border-2 border-dashed ${
                           isDarkMode
@@ -1216,7 +1215,7 @@ export default function HomePage() {
                   {/* Segunda imagem */}
                   <div className="relative group">
                     {project.media?.image2 ? (
-                      <div className="relative overflow-hidden rounded-xl h-40 shadow-lg">
+                      <div className="relative overflow-hidden rounded-xl h-32 sm:h-36 md:h-40 shadow-lg">
                         <img
                           src={project.media.image2}
                           alt={`${project.title} - Screenshot 2`}
@@ -1275,7 +1274,7 @@ export default function HomePage() {
                       </div>
                     ) : (
                       <div
-                        className={`h-40 rounded-xl ${
+                        className={`h-32 sm:h-36 md:h-40 rounded-xl ${
                           isDarkMode ? "bg-deep-teal/20" : "bg-emerald-green/20"
                         } flex items-center justify-center border-2 border-dashed ${
                           isDarkMode
@@ -1308,19 +1307,18 @@ export default function HomePage() {
                 <div className="relative group">
                   {project.media?.video ? (
                     <div className="relative overflow-hidden rounded-xl shadow-lg">
-                      {/* Container com proporção 16:9 */}
-                      <div
-                        className="relative w-full"
-                        style={{ paddingBottom: "56.25%" }}
-                      >
+                      {/* Container responsivo para vídeo */}
+                      <div className="relative w-full aspect-[4/3] md:aspect-video">
                         {" "}
-                        {/* 16:9 aspect ratio */}
+                        {/* 4:3 no mobile, 16:9 no desktop */}
                         <video
                           src={project.media.video}
-                          className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                          className="absolute inset-0 w-full h-full object-contain md:object-cover transition-all duration-500 group-hover:scale-105"
                           controls
                           preload="metadata"
                           poster={project.media.image1} // Usa a primeira imagem como poster
+                          playsInline // Importante para iOS
+                          webkit-playsinline="true" // Para compatibilidade iOS
                           onError={(e) => {
                             const target = e.target as HTMLVideoElement;
                             target.style.display = "none";
@@ -1376,13 +1374,10 @@ export default function HomePage() {
                     </div>
                   ) : (
                     <div className="relative overflow-hidden rounded-xl shadow-lg">
-                      {/* Container com proporção 16:9 para placeholder */}
-                      <div
-                        className="relative w-full"
-                        style={{ paddingBottom: "56.25%" }}
-                      >
+                      {/* Container responsivo para placeholder do vídeo */}
+                      <div className="relative w-full aspect-[4/3] md:aspect-video">
                         {" "}
-                        {/* 16:9 aspect ratio */}
+                        {/* 4:3 no mobile, 16:9 no desktop */}
                         <div
                           className={`absolute inset-0 ${
                             isDarkMode
@@ -1634,10 +1629,15 @@ export default function HomePage() {
                   </div>
                 </motion.div>
 
-                <motion.div
+                <motion.a
+                  href="https://wa.me/5511989437498"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
-                  className={`flex items-center p-4 rounded-lg ${
-                    isDarkMode ? "surprise-card" : "surprise-card-light"
+                  className={`flex items-center p-4 rounded-lg cursor-pointer transition-all duration-300 ${
+                    isDarkMode
+                      ? "surprise-card hover:bg-electric-blue/10"
+                      : "surprise-card-light hover:bg-emerald-green/10"
                   }`}
                 >
                   <MessageCircle
@@ -1661,7 +1661,7 @@ export default function HomePage() {
                       +55 (11) 98943-7498
                     </p>
                   </div>
-                </motion.div>
+                </motion.a>
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -1881,6 +1881,71 @@ export default function HomePage() {
       <ExperienceSection />
       <ProjectsSection />
       <ContactSection />
+
+      {/* Footer */}
+      <footer
+        className={`py-12 ${
+          isDarkMode ? "bg-slate-900" : "bg-white"
+        } border-t ${isDarkMode ? "border-slate-700" : "border-slate-200"}`}
+      >
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p
+                className={`text-sm ${
+                  isDarkMode ? "text-light-gray" : "text-dark-gray"
+                }`}
+              >
+                © {new Date().getFullYear()} Leandro Tenório. Todos os direitos
+                reservados.
+              </p>
+            </div>
+
+            <div className="flex space-x-6">
+              <motion.a
+                href="https://www.linkedin.com/in/leandro-tenório-088378310/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className={`${
+                  isDarkMode
+                    ? "text-light-gray hover:text-electric-blue"
+                    : "text-dark-gray hover:text-emerald-green"
+                } transition-colors`}
+              >
+                <Linkedin className="w-5 h-5" />
+              </motion.a>
+
+              <motion.a
+                href="https://github.com/TenorioDevfullStack"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className={`${
+                  isDarkMode
+                    ? "text-light-gray hover:text-electric-blue"
+                    : "text-dark-gray hover:text-emerald-green"
+                } transition-colors`}
+              >
+                <Github className="w-5 h-5" />
+              </motion.a>
+
+              <motion.a
+                href="mailto:contato@intelligentdevsolutions.com"
+                whileHover={{ scale: 1.1 }}
+                className={`${
+                  isDarkMode
+                    ? "text-light-gray hover:text-electric-blue"
+                    : "text-dark-gray hover:text-emerald-green"
+                } transition-colors`}
+              >
+                <Mail className="w-5 h-5" />
+              </motion.a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
       <ScrollToTopButton />
     </main>
   );
