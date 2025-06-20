@@ -13,14 +13,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Verificar se as variáveis de ambiente estão configuradas
+    if (!process.env.BREVO_SMTP_USER || !process.env.BREVO_SMTP_PASS) {
+      console.error("Variáveis de ambiente SMTP não configuradas");
+      return NextResponse.json(
+        { error: "Configuração de email não disponível" },
+        { status: 500 }
+      );
+    }
+
     // Configuração do transporter do nodemailer - Brevo SMTP
     const transporter = nodemailer.createTransport({
       host: "smtp-relay.brevo.com",
       port: 587,
       secure: false, // false para porta 587, true para porta 465
       auth: {
-        user: "901963001@smtp-brevo.com",
-        pass: "xsmtpsib-2e4a53ab05fb3ac99bb4e53a8a8754725e026a1e0a3a37a0d83048d58a93d706-Evf2DHtd69RnABTj",
+        user: process.env.BREVO_SMTP_USER,
+        pass: process.env.BREVO_SMTP_PASS,
       },
     });
 
