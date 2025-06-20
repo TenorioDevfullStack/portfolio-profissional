@@ -5,8 +5,12 @@ export async function POST(request: NextRequest) {
   try {
     const { name, email, message } = await request.json();
 
+    console.log("📧 Iniciando envio de email...");
+    console.log("Dados recebidos:", { name, email, message });
+
     // Validação básica
     if (!name || !email || !message) {
+      console.log("❌ Validação falhou: campos obrigatórios");
       return NextResponse.json(
         { error: "Todos os campos são obrigatórios" },
         { status: 400 }
@@ -14,13 +18,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Verificar se as variáveis de ambiente estão configuradas
+    console.log("🔍 Verificando variáveis de ambiente...");
+    console.log(
+      "BREVO_SMTP_USER:",
+      process.env.BREVO_SMTP_USER ? "✅ Configurado" : "❌ Não configurado"
+    );
+    console.log(
+      "BREVO_SMTP_PASS:",
+      process.env.BREVO_SMTP_PASS ? "✅ Configurado" : "❌ Não configurado"
+    );
+
     if (!process.env.BREVO_SMTP_USER || !process.env.BREVO_SMTP_PASS) {
-      console.error("Variáveis de ambiente SMTP não configuradas");
+      console.error("❌ Variáveis de ambiente SMTP não configuradas");
       return NextResponse.json(
         { error: "Configuração de email não disponível" },
         { status: 500 }
       );
     }
+
+    console.log("🔧 Configurando transporter SMTP...");
 
     // Configuração do transporter do nodemailer - Brevo SMTP
     const transporter = nodemailer.createTransport({
@@ -32,6 +48,8 @@ export async function POST(request: NextRequest) {
         pass: process.env.BREVO_SMTP_PASS,
       },
     });
+
+    console.log("✅ Transporter configurado");
 
     // Configuração do email
     const mailOptions = {
@@ -79,8 +97,16 @@ export async function POST(request: NextRequest) {
       `,
     };
 
+    console.log("📤 Tentando enviar email...");
+    console.log("De:", mailOptions.from);
+    console.log("Para:", mailOptions.to);
+    console.log("Assunto:", mailOptions.subject);
+
     // Enviar email
-    await transporter.sendMail(mailOptions);
+    const result = await transporter.sendMail(mailOptions);
+
+    console.log("✅ Email enviado com sucesso!");
+    console.log("Message ID:", result.messageId);
 
     return NextResponse.json(
       {
@@ -90,7 +116,19 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Erro ao enviar email:", error);
+    console.error("❌ Erro ao enviar email:", error);
+
+    // Type-safe error handling
+    if (error instanceof Error) {
+      console.error("Detalhes do erro:", {
+        message: error.message,
+        name: error.name,
+        stack: error.stack,
+      });
+    } else {
+      console.error("Erro desconhecido:", error);
+    }
+
     return NextResponse.json(
       { error: "Erro interno do servidor. Tente novamente mais tarde." },
       { status: 500 }
