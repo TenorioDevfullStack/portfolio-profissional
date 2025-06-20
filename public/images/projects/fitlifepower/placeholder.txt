@@ -1,0 +1,19 @@
+# FitLifePower - Site de Afiliados
+
+## Arquivos esperados nesta pasta:
+
+1. screenshot1.jpg - Página inicial do site
+2. screenshot2.jpg - Página de produto/detalhes  
+3. demo.mp4 - Vídeo demonstrativo
+
+## Especificações:
+- Imagens: 800x600px ou 1200x800px, formato JPG/PNG
+- Vídeo: 30-60 segundos, formato MP4, resolução 1280x720px
+- Tamanho máximo: 500KB para imagens, 5MB para vídeos
+
+## Conteúdo sugerido:
+- screenshot1.jpg: Captura da página inicial mostrando produtos de fitness
+- screenshot2.jpg: Página de detalhes de um produto específico
+- demo.mp4: Demonstração da navegação e funcionalidades do site
+
+Substitua este arquivo pelos arquivos reais do projeto. 

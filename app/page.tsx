@@ -894,6 +894,11 @@ export default function HomePage() {
       githubUrl: "https://github.com/TenorioDevfullStack/telegram-bot-ia.git",
       featured: true,
       category: "IA & Automação",
+      media: {
+        image1: "/images/projects/captalead-bot/screenshot1.jpg",
+        image2: "/images/projects/captalead-bot/screenshot2.jpg",
+        video: "/images/projects/captalead-bot/demo.mp4",
+      },
     },
     {
       title: "FitLifePower - Site de Afiliados",
@@ -912,6 +917,11 @@ export default function HomePage() {
         "https://github.com/TenorioDevfullStack/fitlifepower-site-hostgator.git",
       featured: true,
       category: "E-commerce & Marketing",
+      media: {
+        image1: "/images/projects/fitlifepower/screenshot1.jpg",
+        image2: "/images/projects/fitlifepower/screenshot2.jpg",
+        video: "/images/projects/fitlifepower/demo.mp4",
+      },
     },
     {
       title: "Organizador Pessoal IA - Telegram",
@@ -928,6 +938,11 @@ export default function HomePage() {
         "https://github.com/TenorioDevfullStack/meu-bot-organizador-pessoal.git",
       featured: true,
       category: "Produtividade & IA",
+      media: {
+        image1: "/images/projects/organizador-telegram/screenshot1.jpg",
+        image2: "/images/projects/organizador-telegram/screenshot2.jpg",
+        video: "/images/projects/organizador-telegram/demo.mp4",
+      },
     },
     {
       title: "Agente Pessoal WhatsApp GPT",
@@ -944,6 +959,11 @@ export default function HomePage() {
         "https://github.com/TenorioDevfullStack/AgentPessoal3.5Turbo.git",
       featured: true,
       category: "IA & Assistentes",
+      media: {
+        image1: "/images/projects/whatsapp-assistant/screenshot1.jpg",
+        image2: "/images/projects/whatsapp-assistant/screenshot2.jpg",
+        video: "/images/projects/whatsapp-assistant/demo.mp4",
+      },
     },
     {
       title: "Habit Tracker - App Android",
@@ -959,6 +979,11 @@ export default function HomePage() {
       githubUrl: "https://github.com/TenorioDevfullStack/Habit_Tracker_App.git",
       status: "Em desenvolvimento",
       category: "Mobile & Produtividade",
+      media: {
+        image1: "/images/projects/habit-tracker/screenshot1.jpg",
+        image2: "/images/projects/habit-tracker/screenshot2.jpg",
+        video: "/images/projects/habit-tracker/demo.mp4",
+      },
     },
     {
       title: "Landing Page - Agência de IA",
@@ -974,6 +999,11 @@ export default function HomePage() {
       liveUrl: "https://agencia.intelligentdevsolutions.com/",
       featured: true,
       category: "Web Design & Institucional",
+      media: {
+        image1: "/images/projects/agencia-ia/screenshot1.jpg",
+        image2: "/images/projects/agencia-ia/screenshot2.jpg",
+        video: "/images/projects/agencia-ia/demo.mp4",
+      },
     },
   ];
 
@@ -1071,87 +1101,335 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Media Section - Espaço para imagens e vídeo */}
+              {/* Media Section - Imagens e vídeo reais */}
               <div
                 className={`p-6 ${
                   isDarkMode ? "bg-deep-teal/5" : "bg-sky-blue/5"
                 }`}
               >
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div
-                    className={`h-32 rounded-lg ${
-                      isDarkMode ? "bg-deep-teal/20" : "bg-ocean-blue/20"
-                    } flex items-center justify-center border-2 border-dashed ${
-                      isDarkMode
-                        ? "border-electric-blue/30"
-                        : "border-ocean-blue/30"
+                {/* Título da seção de mídia */}
+                <div className="mb-4">
+                  <h4
+                    className={`text-sm font-semibold mb-2 ${
+                      isDarkMode ? "text-electric-blue" : "text-ocean-blue"
                     }`}
                   >
-                    <div className="text-center">
-                      <Brain
-                        className={`w-8 h-8 mx-auto mb-2 ${
-                          isDarkMode ? "text-electric-blue" : "text-ocean-blue"
-                        }`}
-                      />
-                      <span
-                        className={`text-xs ${
-                          isDarkMode ? "text-light-gray" : "text-warm-gray"
-                        }`}
-                      >
-                        Screenshot 1
-                      </span>
-                    </div>
-                  </div>
-                  <div
-                    className={`h-32 rounded-lg ${
-                      isDarkMode ? "bg-deep-teal/20" : "bg-emerald-green/20"
-                    } flex items-center justify-center border-2 border-dashed ${
-                      isDarkMode
-                        ? "border-electric-blue/30"
-                        : "border-emerald-green/30"
-                    }`}
-                  >
-                    <div className="text-center">
-                      <Smartphone
-                        className={`w-8 h-8 mx-auto mb-2 ${
+                    📸 Visualização do Projeto
+                  </h4>
+                </div>
+
+                {/* Grid de imagens melhorado */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  {/* Primeira imagem */}
+                  <div className="relative group">
+                    {project.media?.image1 ? (
+                      <div className="relative overflow-hidden rounded-xl h-40 shadow-lg">
+                        <img
+                          src={project.media.image1}
+                          alt={`${project.title} - Screenshot 1`}
+                          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            target.nextElementSibling?.classList.remove(
+                              "hidden"
+                            );
+                          }}
+                        />
+                        {/* Overlay com ícone de play */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="bg-white/90 rounded-full p-2">
+                            <Brain
+                              className={`w-5 h-5 ${
+                                isDarkMode
+                                  ? "text-electric-blue"
+                                  : "text-ocean-blue"
+                              }`}
+                            />
+                          </div>
+                        </div>
+                        {/* Placeholder fallback */}
+                        <div
+                          className={`absolute inset-0 ${
+                            isDarkMode ? "bg-deep-teal/20" : "bg-ocean-blue/20"
+                          } flex items-center justify-center border-2 border-dashed ${
+                            isDarkMode
+                              ? "border-electric-blue/30"
+                              : "border-ocean-blue/30"
+                          } hidden`}
+                        >
+                          <div className="text-center">
+                            <Brain
+                              className={`w-8 h-8 mx-auto mb-2 ${
+                                isDarkMode
+                                  ? "text-electric-blue"
+                                  : "text-ocean-blue"
+                              }`}
+                            />
+                            <span
+                              className={`text-xs ${
+                                isDarkMode
+                                  ? "text-light-gray"
+                                  : "text-warm-gray"
+                              }`}
+                            >
+                              Screenshot 1
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className={`h-40 rounded-xl ${
+                          isDarkMode ? "bg-deep-teal/20" : "bg-ocean-blue/20"
+                        } flex items-center justify-center border-2 border-dashed ${
                           isDarkMode
-                            ? "text-electric-blue"
-                            : "text-emerald-green"
-                        }`}
-                      />
-                      <span
-                        className={`text-xs ${
-                          isDarkMode ? "text-light-gray" : "text-warm-gray"
-                        }`}
+                            ? "border-electric-blue/30"
+                            : "border-ocean-blue/30"
+                        } shadow-lg`}
                       >
-                        Screenshot 2
-                      </span>
-                    </div>
+                        <div className="text-center">
+                          <Brain
+                            className={`w-8 h-8 mx-auto mb-2 ${
+                              isDarkMode
+                                ? "text-electric-blue"
+                                : "text-ocean-blue"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              isDarkMode ? "text-light-gray" : "text-warm-gray"
+                            }`}
+                          >
+                            Screenshot 1
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Segunda imagem */}
+                  <div className="relative group">
+                    {project.media?.image2 ? (
+                      <div className="relative overflow-hidden rounded-xl h-40 shadow-lg">
+                        <img
+                          src={project.media.image2}
+                          alt={`${project.title} - Screenshot 2`}
+                          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            target.nextElementSibling?.classList.remove(
+                              "hidden"
+                            );
+                          }}
+                        />
+                        {/* Overlay com ícone */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="bg-white/90 rounded-full p-2">
+                            <Smartphone
+                              className={`w-5 h-5 ${
+                                isDarkMode
+                                  ? "text-electric-blue"
+                                  : "text-emerald-green"
+                              }`}
+                            />
+                          </div>
+                        </div>
+                        {/* Placeholder fallback */}
+                        <div
+                          className={`absolute inset-0 ${
+                            isDarkMode
+                              ? "bg-deep-teal/20"
+                              : "bg-emerald-green/20"
+                          } flex items-center justify-center border-2 border-dashed ${
+                            isDarkMode
+                              ? "border-electric-blue/30"
+                              : "border-emerald-green/30"
+                          } hidden`}
+                        >
+                          <div className="text-center">
+                            <Smartphone
+                              className={`w-8 h-8 mx-auto mb-2 ${
+                                isDarkMode
+                                  ? "text-electric-blue"
+                                  : "text-emerald-green"
+                              }`}
+                            />
+                            <span
+                              className={`text-xs ${
+                                isDarkMode
+                                  ? "text-light-gray"
+                                  : "text-warm-gray"
+                              }`}
+                            >
+                              Screenshot 2
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className={`h-40 rounded-xl ${
+                          isDarkMode ? "bg-deep-teal/20" : "bg-emerald-green/20"
+                        } flex items-center justify-center border-2 border-dashed ${
+                          isDarkMode
+                            ? "border-electric-blue/30"
+                            : "border-emerald-green/30"
+                        } shadow-lg`}
+                      >
+                        <div className="text-center">
+                          <Smartphone
+                            className={`w-8 h-8 mx-auto mb-2 ${
+                              isDarkMode
+                                ? "text-electric-blue"
+                                : "text-emerald-green"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              isDarkMode ? "text-light-gray" : "text-warm-gray"
+                            }`}
+                          >
+                            Screenshot 2
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div
-                  className={`h-24 rounded-lg ${
-                    isDarkMode ? "bg-vibrant-cyan/20" : "bg-golden-amber/20"
-                  } flex items-center justify-center border-2 border-dashed ${
-                    isDarkMode
-                      ? "border-vibrant-cyan/30"
-                      : "border-golden-amber/30"
-                  }`}
-                >
-                  <div className="text-center">
-                    <Zap
-                      className={`w-6 h-6 mx-auto mb-1 ${
-                        isDarkMode ? "text-vibrant-cyan" : "text-golden-amber"
-                      }`}
-                    />
-                    <span
-                      className={`text-xs ${
-                        isDarkMode ? "text-light-gray" : "text-warm-gray"
-                      }`}
-                    >
-                      Vídeo Demo
-                    </span>
-                  </div>
+
+                {/* Vídeo melhorado */}
+                <div className="relative group">
+                  {project.media?.video ? (
+                    <div className="relative overflow-hidden rounded-xl shadow-lg">
+                      {/* Container com proporção 16:9 */}
+                      <div
+                        className="relative w-full"
+                        style={{ paddingBottom: "56.25%" }}
+                      >
+                        {" "}
+                        {/* 16:9 aspect ratio */}
+                        <video
+                          src={project.media.video}
+                          className="absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                          controls
+                          preload="metadata"
+                          poster={project.media.image1} // Usa a primeira imagem como poster
+                          onError={(e) => {
+                            const target = e.target as HTMLVideoElement;
+                            target.style.display = "none";
+                            target.nextElementSibling?.classList.remove(
+                              "hidden"
+                            );
+                          }}
+                        />
+                        {/* Overlay com ícone de play */}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                          <div className="bg-white/90 rounded-full p-3">
+                            <Zap
+                              className={`w-6 h-6 ${
+                                isDarkMode
+                                  ? "text-vibrant-cyan"
+                                  : "text-golden-amber"
+                              }`}
+                            />
+                          </div>
+                        </div>
+                        {/* Placeholder fallback */}
+                        <div
+                          className={`absolute inset-0 ${
+                            isDarkMode
+                              ? "bg-vibrant-cyan/20"
+                              : "bg-golden-amber/20"
+                          } flex items-center justify-center border-2 border-dashed ${
+                            isDarkMode
+                              ? "border-vibrant-cyan/30"
+                              : "border-golden-amber/30"
+                          } hidden`}
+                        >
+                          <div className="text-center">
+                            <Zap
+                              className={`w-6 h-6 mx-auto mb-1 ${
+                                isDarkMode
+                                  ? "text-vibrant-cyan"
+                                  : "text-golden-amber"
+                              }`}
+                            />
+                            <span
+                              className={`text-xs ${
+                                isDarkMode
+                                  ? "text-light-gray"
+                                  : "text-warm-gray"
+                              }`}
+                            >
+                              Vídeo Demo
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative overflow-hidden rounded-xl shadow-lg">
+                      {/* Container com proporção 16:9 para placeholder */}
+                      <div
+                        className="relative w-full"
+                        style={{ paddingBottom: "56.25%" }}
+                      >
+                        {" "}
+                        {/* 16:9 aspect ratio */}
+                        <div
+                          className={`absolute inset-0 ${
+                            isDarkMode
+                              ? "bg-vibrant-cyan/20"
+                              : "bg-golden-amber/20"
+                          } flex items-center justify-center border-2 border-dashed ${
+                            isDarkMode
+                              ? "border-vibrant-cyan/30"
+                              : "border-golden-amber/30"
+                          }`}
+                        >
+                          <div className="text-center">
+                            <Zap
+                              className={`w-8 h-8 mx-auto mb-2 ${
+                                isDarkMode
+                                  ? "text-vibrant-cyan"
+                                  : "text-golden-amber"
+                              }`}
+                            />
+                            <span
+                              className={`text-sm font-medium ${
+                                isDarkMode
+                                  ? "text-light-gray"
+                                  : "text-warm-gray"
+                              }`}
+                            >
+                              Vídeo Demo
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Indicadores de mídia */}
+                <div className="flex justify-center mt-3 space-x-2">
+                  <div
+                    className={`w-2 h-2 rounded-full ${
+                      isDarkMode ? "bg-electric-blue" : "bg-ocean-blue"
+                    }`}
+                  ></div>
+                  <div
+                    className={`w-2 h-2 rounded-full ${
+                      isDarkMode ? "bg-electric-blue" : "bg-ocean-blue"
+                    }`}
+                  ></div>
+                  <div
+                    className={`w-2 h-2 rounded-full ${
+                      isDarkMode ? "bg-vibrant-cyan" : "bg-golden-amber"
+                    }`}
+                  ></div>
                 </div>
               </div>
 
@@ -1234,233 +1512,346 @@ export default function HomePage() {
   );
 
   // Seção de Contato
-  const ContactSection = () => (
-    <section
-      id="contato"
-      className={`py-20 ${isDarkMode ? "surprise-bg" : "surprise-bg-light"}`}
-    >
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2
-            className={`text-4xl md:text-5xl font-bold mb-6 ${
-              isDarkMode ? "electric-text" : "text-dark-teal"
-            }`}
-          >
-            Entre em Contato
-          </h2>
-          <p
-            className={`text-lg ${
-              isDarkMode ? "text-light-gray" : "text-dark-gray"
-            }`}
-          >
-            Vamos conversar sobre seu próximo projeto
-          </p>
-        </motion.div>
+  const ContactSection = () => {
+    const [formData, setFormData] = useState({
+      name: "",
+      email: "",
+      message: "",
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<
+      "idle" | "success" | "error"
+    >("idle");
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+    const handleInputChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (!formData.name || !formData.email || !formData.message) {
+        setSubmitStatus("error");
+        return;
+      }
+
+      setIsSubmitting(true);
+      setSubmitStatus("idle");
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          setSubmitStatus("success");
+          setFormData({ name: "", email: "", message: "" });
+        } else {
+          setSubmitStatus("error");
+        }
+      } catch (error) {
+        console.error("Erro ao enviar mensagem:", error);
+        setSubmitStatus("error");
+      } finally {
+        setIsSubmitting(false);
+      }
+    };
+
+    return (
+      <section
+        id="contato"
+        className={`py-20 ${isDarkMode ? "surprise-bg" : "surprise-bg-light"}`}
+      >
+        <div className="container mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="text-center mb-16"
           >
-            <h3
-              className={`text-2xl font-bold mb-6 ${
-                isDarkMode ? "text-white" : "text-dark-gray"
+            <h2
+              className={`text-4xl md:text-5xl font-bold mb-6 ${
+                isDarkMode ? "electric-text" : "text-dark-teal"
               }`}
             >
-              Informações de Contato
-            </h3>
+              Entre em Contato
+            </h2>
+            <p
+              className={`text-lg ${
+                isDarkMode ? "text-light-gray" : "text-dark-gray"
+              }`}
+            >
+              Vamos conversar sobre seu próximo projeto
+            </p>
+          </motion.div>
 
-            <div className="space-y-6">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className={`flex items-center p-4 rounded-lg ${
-                  isDarkMode ? "surprise-card" : "surprise-card-light"
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h3
+                className={`text-2xl font-bold mb-6 ${
+                  isDarkMode ? "text-white" : "text-dark-gray"
                 }`}
               >
-                <Mail
-                  className={`w-6 h-6 mr-4 ${
-                    isDarkMode ? "text-electric-blue" : "text-dark-teal"
+                Informações de Contato
+              </h3>
+
+              <div className="space-y-6">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className={`flex items-center p-4 rounded-lg ${
+                    isDarkMode ? "surprise-card" : "surprise-card-light"
                   }`}
-                />
+                >
+                  <Mail
+                    className={`w-6 h-6 mr-4 ${
+                      isDarkMode ? "text-electric-blue" : "text-dark-teal"
+                    }`}
+                  />
+                  <div>
+                    <h4
+                      className={`font-semibold ${
+                        isDarkMode ? "text-white" : "text-dark-gray"
+                      }`}
+                    >
+                      Email
+                    </h4>
+                    <p
+                      className={`${
+                        isDarkMode ? "text-light-gray" : "text-dark-gray"
+                      }`}
+                    >
+                      contato@intelligentdevsolutions.com
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className={`flex items-center p-4 rounded-lg ${
+                    isDarkMode ? "surprise-card" : "surprise-card-light"
+                  }`}
+                >
+                  <MessageCircle
+                    className={`w-6 h-6 mr-4 ${
+                      isDarkMode ? "text-electric-blue" : "text-dark-teal"
+                    }`}
+                  />
+                  <div>
+                    <h4
+                      className={`font-semibold ${
+                        isDarkMode ? "text-white" : "text-dark-gray"
+                      }`}
+                    >
+                      WhatsApp
+                    </h4>
+                    <p
+                      className={`${
+                        isDarkMode ? "text-light-gray" : "text-dark-gray"
+                      }`}
+                    >
+                      +55 (11) 98943-7498
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className={`flex items-center p-4 rounded-lg ${
+                    isDarkMode ? "surprise-card" : "surprise-card-light"
+                  }`}
+                >
+                  <MapPin
+                    className={`w-6 h-6 mr-4 ${
+                      isDarkMode ? "text-electric-blue" : "text-dark-teal"
+                    }`}
+                  />
+                  <div>
+                    <h4
+                      className={`font-semibold ${
+                        isDarkMode ? "text-white" : "text-dark-gray"
+                      }`}
+                    >
+                      Localização
+                    </h4>
+                    <p
+                      className={`${
+                        isDarkMode ? "text-light-gray" : "text-dark-gray"
+                      }`}
+                    >
+                      São Paulo, SP - Brasil
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className={`${
+                isDarkMode
+                  ? "surprise-card neon-border"
+                  : "surprise-card-light neon-border-light"
+              } p-8 rounded-2xl`}
+            >
+              <h3
+                className={`text-2xl font-bold mb-6 ${
+                  isDarkMode ? "text-white" : "text-dark-gray"
+                }`}
+              >
+                Envie uma Mensagem
+              </h3>
+
+              {/* Status de envio */}
+              {submitStatus === "success" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mb-6 p-4 rounded-lg ${
+                    isDarkMode
+                      ? "bg-emerald-green/20 text-emerald-green"
+                      : "bg-emerald-green/20 text-emerald-green"
+                  }`}
+                >
+                  ✅ Mensagem enviada com sucesso! Entraremos em contato em
+                  breve.
+                </motion.div>
+              )}
+
+              {submitStatus === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mb-6 p-4 rounded-lg ${
+                    isDarkMode
+                      ? "bg-red-500/20 text-red-400"
+                      : "bg-red-500/20 text-red-600"
+                  }`}
+                >
+                  ❌ Erro ao enviar mensagem. Tente novamente.
+                </motion.div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <h4
-                    className={`font-semibold ${
-                      isDarkMode ? "text-white" : "text-dark-gray"
+                  <label
+                    className={`block text-sm font-medium mb-2 ${
+                      isDarkMode ? "text-light-gray" : "text-dark-gray"
+                    }`}
+                  >
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                      isDarkMode
+                        ? "bg-deep-teal/20 border-electric-blue/30 text-white focus:border-electric-blue"
+                        : "bg-white border-sky-blue/30 text-dark-gray focus:border-sky-blue"
+                    }`}
+                    placeholder="Seu nome"
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className={`block text-sm font-medium mb-2 ${
+                      isDarkMode ? "text-light-gray" : "text-dark-gray"
                     }`}
                   >
                     Email
-                  </h4>
-                  <p
-                    className={`${
-                      isDarkMode ? "text-light-gray" : "text-dark-gray"
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                      isDarkMode
+                        ? "bg-deep-teal/20 border-electric-blue/30 text-white focus:border-electric-blue"
+                        : "bg-white border-sky-blue/30 text-dark-gray focus:border-sky-blue"
                     }`}
-                  >
-                    contato@intelligentdevsolutions.com
-                  </p>
+                    placeholder="seu@email.com"
+                    disabled={isSubmitting}
+                  />
                 </div>
-              </motion.div>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className={`flex items-center p-4 rounded-lg ${
-                  isDarkMode ? "surprise-card" : "surprise-card-light"
-                }`}
-              >
-                <MessageCircle
-                  className={`w-6 h-6 mr-4 ${
-                    isDarkMode ? "text-electric-blue" : "text-dark-teal"
-                  }`}
-                />
                 <div>
-                  <h4
-                    className={`font-semibold ${
-                      isDarkMode ? "text-white" : "text-dark-gray"
-                    }`}
-                  >
-                    WhatsApp
-                  </h4>
-                  <p
-                    className={`${
+                  <label
+                    className={`block text-sm font-medium mb-2 ${
                       isDarkMode ? "text-light-gray" : "text-dark-gray"
                     }`}
                   >
-                    +55 (11) 98943-7498
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className={`flex items-center p-4 rounded-lg ${
-                  isDarkMode ? "surprise-card" : "surprise-card-light"
-                }`}
-              >
-                <MapPin
-                  className={`w-6 h-6 mr-4 ${
-                    isDarkMode ? "text-electric-blue" : "text-dark-teal"
-                  }`}
-                />
-                <div>
-                  <h4
-                    className={`font-semibold ${
-                      isDarkMode ? "text-white" : "text-dark-gray"
+                    Mensagem
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={4}
+                    className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                      isDarkMode
+                        ? "bg-deep-teal/20 border-electric-blue/30 text-white focus:border-electric-blue"
+                        : "bg-white border-sky-blue/30 text-dark-gray focus:border-sky-blue"
                     }`}
-                  >
-                    Localização
-                  </h4>
-                  <p
-                    className={`${
-                      isDarkMode ? "text-light-gray" : "text-dark-gray"
-                    }`}
-                  >
-                    São Paulo, SP - Brasil
-                  </p>
+                    placeholder="Conte-me sobre seu projeto..."
+                    disabled={isSubmitting}
+                  />
                 </div>
-              </motion.div>
-            </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className={`${
-              isDarkMode
-                ? "surprise-card neon-border"
-                : "surprise-card-light neon-border-light"
-            } p-8 rounded-2xl`}
-          >
-            <h3
-              className={`text-2xl font-bold mb-6 ${
-                isDarkMode ? "text-white" : "text-dark-gray"
-              }`}
-            >
-              Envie uma Mensagem
-            </h3>
-
-            <form className="space-y-6">
-              <div>
-                <label
-                  className={`block text-sm font-medium mb-2 ${
-                    isDarkMode ? "text-light-gray" : "text-dark-gray"
+                <motion.button
+                  whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                  } ${
+                    isDarkMode
+                      ? "electric-glow bg-electric-blue text-dark-blue hover:bg-vibrant-cyan"
+                      : "light-glow bg-emerald-green text-white hover:bg-ocean-blue"
                   }`}
                 >
-                  Nome
-                </label>
-                <input
-                  type="text"
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
-                    isDarkMode
-                      ? "bg-deep-teal/20 border-electric-blue/30 text-white focus:border-electric-blue"
-                      : "bg-white border-sky-blue/30 text-dark-gray focus:border-sky-blue"
-                  }`}
-                  placeholder="Seu nome"
-                />
-              </div>
-
-              <div>
-                <label
-                  className={`block text-sm font-medium mb-2 ${
-                    isDarkMode ? "text-light-gray" : "text-dark-gray"
-                  }`}
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
-                    isDarkMode
-                      ? "bg-deep-teal/20 border-electric-blue/30 text-white focus:border-electric-blue"
-                      : "bg-white border-sky-blue/30 text-dark-gray focus:border-sky-blue"
-                  }`}
-                  placeholder="seu@email.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  className={`block text-sm font-medium mb-2 ${
-                    isDarkMode ? "text-light-gray" : "text-dark-gray"
-                  }`}
-                >
-                  Mensagem
-                </label>
-                <textarea
-                  rows={4}
-                  className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
-                    isDarkMode
-                      ? "bg-deep-teal/20 border-electric-blue/30 text-white focus:border-electric-blue"
-                      : "bg-white border-sky-blue/30 text-dark-gray focus:border-sky-blue"
-                  }`}
-                  placeholder="Conte-me sobre seu projeto..."
-                />
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className={`w-full flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                  isDarkMode
-                    ? "electric-glow bg-electric-blue text-dark-blue hover:bg-vibrant-cyan"
-                    : "light-glow bg-emerald-green text-white hover:bg-ocean-blue"
-                }`}
-              >
-                <Send className="w-5 h-5 mr-2" />
-                Enviar Mensagem
-              </motion.button>
-            </form>
-          </motion.div>
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Enviar Mensagem
+                    </>
+                  )}
+                </motion.button>
+              </form>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 
   // Botão de voltar ao topo
   const ScrollToTopButton = () => (
