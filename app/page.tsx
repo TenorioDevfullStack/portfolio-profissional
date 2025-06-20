@@ -23,6 +23,8 @@ import {
   Send,
   Phone,
   MessageCircle,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -295,13 +297,20 @@ export default function HomePage() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className={`w-32 h-32 mx-auto mb-8 rounded-full ${
-              isDarkMode
-                ? "electric-glow bg-gradient-to-br from-electric-blue to-vibrant-cyan"
-                : "light-glow bg-gradient-to-br from-emerald-green to-golden-amber"
-            } flex items-center justify-center text-4xl font-bold text-white`}
+            className={`w-44 h-44 mx-auto mb-8 rounded-full ${
+              isDarkMode ? "electric-glow" : "light-glow"
+            }`}
+            style={{
+              backgroundImage: "url(/images/anime_portrait.png)",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundColor: "#2a3f2b",
+            }}
+            role="img"
+            aria-label="Leandro Tenório"
           >
-            LT
+            {/* Imagem de fundo para evitar cortes e preencher o círculo */}
           </motion.div>
         </motion.div>
 
@@ -947,17 +956,11 @@ export default function HomePage() {
     {
       title: "Agente Pessoal WhatsApp GPT",
       description:
-        "Assistente pessoal inteligente para WhatsApp integrado com ChatGPT da OpenAI. Capaz de responder perguntas complexas, auxiliar em tarefas do dia a dia e manter conversas naturais.",
-      technologies: [
-        "Python",
-        "WhatsApp API",
-        "OpenAI GPT",
-        "NLP",
-        "Automation",
-      ],
-      githubUrl:
-        "https://github.com/TenorioDevfullStack/AgentPessoal3.5Turbo.git",
+        "Assistente pessoal para WhatsApp integrado com a API da OpenAI (ChatGPT), oferecendo respostas inteligentes e personalizadas em tempo real.",
+      repo: "https://github.com/TenorioDevfullStack/AgentPessoal3.5Turbo.git",
+      technologies: ["Python", "WhatsApp API", "OpenAI API", "ChatGPT"],
       featured: true,
+      status: "Em desenvolvimento",
       category: "IA & Assistentes",
       media: {
         image1: "/images/projects/whatsapp-assistant/screenshot1.jpg",
@@ -1049,7 +1052,11 @@ export default function HomePage() {
                   ? "surprise-card neon-border"
                   : "surprise-card-light neon-border-light"
               } rounded-2xl overflow-hidden ${
-                project.featured ? "border-2" : ""
+                project.featured
+                  ? isDarkMode
+                    ? "border-2 border-vibrant-cyan"
+                    : "border-2 border-golden-amber"
+                  : ""
               }`}
             >
               {/* Header do Projeto */}
@@ -1062,13 +1069,22 @@ export default function HomePage() {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <h3
-                      className={`text-2xl font-bold mb-2 ${
-                        isDarkMode ? "text-white" : "text-dark-gray"
-                      }`}
-                    >
-                      {project.title}
-                    </h3>
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-2xl font-bold text-white">
+                        {project.title}
+                      </h3>
+                      {project.status && (
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            isDarkMode
+                              ? "bg-vibrant-cyan/20 text-vibrant-cyan"
+                              : "bg-golden-amber/20 text-golden-amber"
+                          }`}
+                        >
+                          {project.status}
+                        </span>
+                      )}
+                    </div>
                     <div
                       className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
                         isDarkMode
@@ -1079,17 +1095,6 @@ export default function HomePage() {
                       {project.category}
                     </div>
                   </div>
-                  {project.status && (
-                    <div
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        isDarkMode
-                          ? "bg-sunset-orange/20 text-sunset-orange"
-                          : "bg-sunset-orange/20 text-sunset-orange"
-                      }`}
-                    >
-                      {project.status}
-                    </div>
-                  )}
                 </div>
 
                 <p
@@ -1520,29 +1525,20 @@ export default function HomePage() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<
-      "idle" | "success" | "error"
-    >("idle");
+      "success" | "error" | null
+    >(null);
 
     const handleInputChange = (
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
       const { name, value } = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
-      if (!formData.name || !formData.email || !formData.message) {
-        setSubmitStatus("error");
-        return;
-      }
-
       setIsSubmitting(true);
-      setSubmitStatus("idle");
+      setSubmitStatus(null);
 
       try {
         const response = await fetch("/api/contact", {
@@ -1560,7 +1556,6 @@ export default function HomePage() {
           setSubmitStatus("error");
         }
       } catch (error) {
-        console.error("Erro ao enviar mensagem:", error);
         setSubmitStatus("error");
       } finally {
         setIsSubmitting(false);
@@ -1720,30 +1715,31 @@ export default function HomePage() {
               {/* Status de envio */}
               {submitStatus === "success" && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mb-6 p-4 rounded-lg ${
+                  className={`p-4 mb-6 rounded-lg flex items-center ${
                     isDarkMode
                       ? "bg-emerald-green/20 text-emerald-green"
                       : "bg-emerald-green/20 text-emerald-green"
                   }`}
                 >
-                  ✅ Mensagem enviada com sucesso! Entraremos em contato em
-                  breve.
+                  <CheckCircle className="w-5 h-5 mr-3" />
+                  Mensagem enviada com sucesso! Obrigado pelo contato.
                 </motion.div>
               )}
 
               {submitStatus === "error" && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mb-6 p-4 rounded-lg ${
+                  className={`p-4 mb-6 rounded-lg flex items-center ${
                     isDarkMode
-                      ? "bg-red-500/20 text-red-400"
-                      : "bg-red-500/20 text-red-600"
+                      ? "bg-red-500/20 text-red-500"
+                      : "bg-red-500/20 text-red-500"
                   }`}
                 >
-                  ❌ Erro ao enviar mensagem. Tente novamente.
+                  <XCircle className="w-5 h-5 mr-3" />
+                  Ocorreu um erro ao enviar a mensagem. Tente novamente.
                 </motion.div>
               )}
 
@@ -1817,7 +1813,7 @@ export default function HomePage() {
                     }`}
                     placeholder="Conte-me sobre seu projeto..."
                     disabled={isSubmitting}
-                  />
+                  ></textarea>
                 </div>
 
                 <motion.button
