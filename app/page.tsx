@@ -27,6 +27,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import Link from "next/link";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -1894,7 +1895,7 @@ export default function HomePage() {
       >
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
+            <div className="mb-4 md:mb-0 text-center md:text-left">
               <p
                 className={`text-sm ${
                   isDarkMode ? "text-light-gray" : "text-dark-gray"
@@ -1903,6 +1904,25 @@ export default function HomePage() {
                 © {new Date().getFullYear()} Leandro Tenório. Todos os direitos
                 reservados.
               </p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-2 text-xs">
+                <Link
+                  href="/privacidade"
+                  className={`hover:underline ${
+                    isDarkMode
+                      ? "text-gray-400 hover:text-electric-blue"
+                      : "text-gray-600 hover:text-emerald-green"
+                  } transition-colors`}
+                >
+                  📜 Política de Privacidade
+                </Link>
+                <span
+                  className={`${
+                    isDarkMode ? "text-gray-600" : "text-gray-400"
+                  }`}
+                >
+                  Este site usa Google Analytics para análise de tráfego
+                </span>
+              </div>
             </div>
 
             <div className="flex space-x-6">
