@@ -26,6 +26,7 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -1513,6 +1514,7 @@ export default function HomePage() {
 
   // Seção de Contato
   const ContactSection = () => {
+    const { trackContact } = useAnalytics();
     const [formData, setFormData] = useState({
       name: "",
       email: "",
@@ -1547,6 +1549,7 @@ export default function HomePage() {
         if (response.ok) {
           setSubmitStatus("success");
           setFormData({ name: "", email: "", message: "" });
+          trackContact("form");
         } else {
           setSubmitStatus("error");
         }
@@ -1634,6 +1637,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
+                  onClick={() => trackContact("whatsapp")}
                   className={`flex items-center p-4 rounded-lg cursor-pointer transition-all duration-300 ${
                     isDarkMode
                       ? "surprise-card hover:bg-electric-blue/10"
